@@ -186,10 +186,8 @@ with c2:
         risk_counts,
         names="risk_category",
         values="customers",
-        hole=0.68,
-
+        hole=0.72,
         color="risk_category",
-
         color_discrete_map={
             "High-risk": "#E45756",
             "Medium-risk": "#F28E2B",
@@ -197,41 +195,31 @@ with c2:
         },
     )
 
-    # SMALLER DONUT
     fig.update_traces(
-
-        textposition="outside",
-
+        textposition="inside",
         texttemplate="%{label}<br>%{percent}",
-
-        textfont_size=13,
-
+        textfont_size=11,
+        insidetextorientation="radial",
         pull=[
-            0.04 if x == "High-risk" else 0
+            0.03 if x == "High-risk" else 0
             for x in risk_counts["risk_category"]
-        ]
+        ],
     )
 
     fig.update_layout(
-
-        height=430,
-
+        height=400,
         showlegend=False,
+        margin=dict(l=5, r=5, t=20, b=5),
 
-        margin=dict(
-            l=40,
-            r=40,
-            t=35,
-            b=35
-        ),
-
+        # CENTER TEXT
         annotations=[
             dict(
                 text=f"<b>Total Customers</b><br>{total_customers:,.0f}",
                 x=0.5,
                 y=0.5,
-                font_size=14,
+                font_size=15,
                 showarrow=False,
+                font_color="#5A5A5A"
             )
         ],
     )
